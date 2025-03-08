@@ -13,22 +13,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
-  display: flex;
-  justify-content: space-evenly;
-
-  align-items: flex-start;
-  margin: auto;
-  position: relative;
-}
-
-.mini-container {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  margin: 50px;
-}
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -60,6 +44,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  box-shadow: 0 0 .5em rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -84,10 +69,33 @@ button:focus-visible {
   }
 }
 
+.container {
+  display: flex;
+  justify-content: space-evenly;
+
+  align-items: flex-start;
+  margin: auto;
+  margin-bottom: 2.5em;
+  position: relative;
+}
+.mini-container {
+  background-color: #1a1a1a;
+  padding-bottom: 2.5em;
+  border-radius: 1em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+  width: 500px;
+
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin: 25px;
+}
+.title-container {
+  margin-bottom: 5em;
+}
 #correct {
   color: #33fd36;
 }
-
 #wrong {
   color: #f3224b;
 }

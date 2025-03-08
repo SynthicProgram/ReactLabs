@@ -1,4 +1,4 @@
-import {Component, useState} from 'react';
+import {use, useEffect, useState} from 'react';
 import RecipeChoices from './RecipeChoices';
 import drinksJson from "./drinks.json"
 
@@ -19,6 +19,8 @@ export default function BaristaForm() {
 
     const [currentDrink, setCurrentDrink] = useState('');
     const [trueRecipe, setTrueRecipe] = useState({});
+    const [triesLeft, setTriesLeft] = useState(3);
+    const [winStreak, setWinStreak] = useState(0);
 
     const [correctTemp, setCheckedTemp] = useState('');
     const [correctSyrup, setCheckedSyrup] = useState('');
@@ -30,6 +32,21 @@ export default function BaristaForm() {
       trueRecipe.syrup != inputs['syrup'] ? setCheckedSyrup('wrong') : setCheckedSyrup('correct');
       trueRecipe.milk != inputs['milk'] ? setCheckedMilk('wrong') : setCheckedMilk('correct');
       trueRecipe.blended != inputs['blended'] ? setCheckedBlended('wrong') : setCheckedBlended('correct');
+
+      if (correctTemp == 'correct' && correctSyrup == 'correct' && correctMilk == 'correct' && correctBlended == 'correct') {
+        alert('You win!');
+        setWinStreak(winStreak + 1);
+        onNewDrink();
+        setTriesLeft(3);
+      } else {
+        setTriesLeft(Math.max(1, triesLeft - 1));
+        if (triesLeft == 1) {
+          alert(`The correct answer was: ${trueRecipe.temp} | ${trueRecipe.syrup} | ${trueRecipe.milk} | ${trueRecipe.blended} blend`);
+          setWinStreak(0);
+          onNewDrink();
+          setTriesLeft(3);
+        }
+      }
     };
     const handleChange = (e) => {
       setInputs((prevState) => ({
@@ -64,16 +81,23 @@ export default function BaristaForm() {
         setTrueRecipe(drinksJson.drinks[randomDrinkIndex].ingredients);
     };
 
+    useEffect(() => {
+        getNextDrink();
+    }, []);
+
     return (
         <div>
-            <h2>Hi, I'd like to order a:</h2>
-            <div className='drink-container'> 
-                <h3 className='mini-header'>{currentDrink}</h3>
+            <div className='title-container'>
+              <p className='mini-header'>High Score: {winStreak} | Tries left: {triesLeft}</p>
+              <h2>Hi, I'd like to order a:</h2>
+              <div className='drink-container'> 
+                  <h3 className='mini-header'>{currentDrink}</h3>
+                </div>
             </div>
-
+            
             <div className='container'>
               <div className='mini-container'>
-                  <h3>Temperature</h3>
+                  <h2>Temperature</h2>
                   <div id={correctTemp} className="answer-space" >
                       {correctTemp && inputs["temperature"]} 
                   </div>
@@ -86,7 +110,7 @@ export default function BaristaForm() {
               </div>
 
               <div className='mini-container'>
-                <h3>Syrup</h3>
+                <h2>Syrup</h2>
                 <div id={correctSyrup} className="answer-space" >
                     {correctSyrup && inputs["syrup"]} 
                 </div>
@@ -99,7 +123,7 @@ export default function BaristaForm() {
               </div>
 
               <div className='mini-container'>
-                <h3>Milk</h3>
+                <h2>Milk</h2>
                 <div id={correctMilk} className="answer-space" >
                     {correctMilk && inputs["milk"]} 
                 </div>
@@ -112,7 +136,7 @@ export default function BaristaForm() {
               </div>
 
               <div className='mini-container'>
-                <h3>Blended</h3>
+                <h2>Blended</h2>
                 <div id={correctBlended} className="answer-space" >
                     {correctBlended && inputs["blended"]} 
                 </div>
