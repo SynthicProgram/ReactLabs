@@ -17,7 +17,6 @@ function App() {
       );
       const json = await response.json();
       setList(json);
-      console.log(json.Data)
     };
     fetchAllCoinData().catch(console.error);
     }, []);
@@ -49,21 +48,22 @@ function App() {
           {searchInput.length > 0 
           ? filteredResults.map((coin) => 
             list.Data[coin].PlatformType === "blockchain" ? 
-            <CoinInfo
-              image={list.Data[coin].ImageUrl}
-              name={list.Data[coin].FullName}
-              symbol={list.Data[coin].Symbol}
-            />
+              <CoinInfo
+                image={list.Data[coin].ImageUrl}
+                name={list.Data[coin].FullName}
+                symbol={list.Data[coin].Symbol}
+              />
             : null
             )
           : list && Object.entries(list.Data).map(([coin]) => 
-            list.Data[coin].PlatformType === "blockchain" ? 
+            list.Data[coin].PlatformType === "blockchain" ? (
               <CoinInfo image={list.Data[coin].ImageUrl}
                 name={list.Data[coin].FullName}
                 symbol={list.Data[coin].Symbol}
               />
-          : null
-          )}
+              ) : null
+            )
+          }
         </ul>
       </div>
     </>
