@@ -5,6 +5,21 @@
   text-align: center;
 }
 
+.sidenav {
+  height: 100%;
+  width: 25%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #232323;
+  padding: 15px 10px 15px 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

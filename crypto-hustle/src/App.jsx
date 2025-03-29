@@ -3,6 +3,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import CoinInfo from '../components/CoinInfo.jsx';
+import SideNav from '../components/SideNav.jsx';
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
           }
         </ul>
       </div>
+      <SideNav />
     </>
   )
 }

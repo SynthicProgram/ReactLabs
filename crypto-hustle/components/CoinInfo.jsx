@@ -13,9 +13,9 @@ const CoinInfo = ({image, name, symbol}) => {
           
             const json = await response.json();
             setPrice(json);
-            console.log(json);
+            //console.log(json);
           };
-          getCoinPrice().catch(console.error);
+        getCoinPrice().catch(console.error);
 
     }, [symbol]);
     return (
@@ -28,7 +28,7 @@ const CoinInfo = ({image, name, symbol}) => {
                 src={`https://www.cryptocompare.com${image}`} 
                 alt={`Small icon for ${name} crypto coin`} 
               />
-              {name} <span className="tab"></span> ${price.USD} USD
+              {name} &lt;<span className="tab"></span> ${price.USD} USD
             </li>
           </ul>
         ) : 
